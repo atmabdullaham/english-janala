@@ -34,16 +34,14 @@ pronunciation
        const card = document.createElement("div");
        console.log(word);
        card.innerHTML = `
-       <div class="card bg-base-100 w-96 shadow-sm text-center">
+       <div class="card bg-base-100  shadow-sm text-center">
         <div class="card-body">
             <h2 class="text-xl font-semibold text-center">${word.word}</h2>
             <p>Meaning/Pronounciation</p>
-            <h2 class="text-xl font-semibold text-center">${word.meaning}/${word.pronunciation}</h2>
-
-            
-            <div class="card-actions justify-end">
-                <button class="btn btn-primary">Buy Now</button>
-                <button class="btn btn-primary">Buy Now</button>
+            <h2 class="text-xl font-semibold text-center font-bangla">${word.meaning}/${word.pronunciation}</h2>
+            <div class="card-actions justify-between">
+                <button class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
+                <button class="btn btn-primary"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
     </div>
