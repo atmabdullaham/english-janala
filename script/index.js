@@ -15,20 +15,15 @@ const loadLevelWord = (id)=>{
 const displayLevelWord = (words)=>{
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML = "";
-
-    id
-: 
-90
-level
-: 
-1
-meaning
-: 
-"পানি"
-pronunciation
-: 
-"ওয়াটার"
-
+    if(words.length === 0){
+        return wordContainer.innerHTML = `
+        <div class="text-center col-span-full">
+          <img class="mx-auto" src="./assets/alert-error.png" alt="">
+          <h4 class="text-lg font-medium text-gray-400">Not any vocabulay added</h4>
+          <h2 class="text-2xl font-bold text-gray-700">Go to next lesson</h2>
+        </div>
+        `;
+    }
 
     for(let word of words){
        const card = document.createElement("div");
@@ -36,9 +31,9 @@ pronunciation
        card.innerHTML = `
        <div class="card bg-base-100  shadow-sm text-center">
         <div class="card-body">
-            <h2 class="text-xl font-semibold text-center">${word.word}</h2>
+            <h2 class="text-xl font-semibold text-center">${word.word? word.word: "Not Found" }</h2>
             <p>Meaning/Pronounciation</p>
-            <h2 class="text-xl font-semibold text-center font-bangla">${word.meaning}/${word.pronunciation}</h2>
+            <h2 class="text-xl font-semibold text-center font-bangla">${word.meaning ? word.meaning: "Not Found"}/${word.pronunciation? word.pronunciation: "Not Found" }</h2>
             <div class="card-actions justify-between">
                 <button class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn btn-primary"><i class="fa-solid fa-volume-high"></i></button>
