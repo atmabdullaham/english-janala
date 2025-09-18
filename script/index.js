@@ -24,6 +24,39 @@ lessonBtns.forEach(btn=>{
     btn.classList.remove("active")
 })
 }
+const loadWordDetails = async(id)=>{
+    const url = `https://openapi.programming-hero.com/api/word/${id}`
+    
+    const res = await fetch(url);
+    const details = await res.json();
+    displayWordDetails(details.data)
+}
+
+const displayWordDetails = (word) =>{
+console.log(word);
+const detailsBox = document.getElementById("details-container");
+detailsBox.innerHTML = `
+  <div class="">
+                <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>: ${word.pronunciation})</h2>
+            </div>
+            <div class="">
+                <h2 class="font-bold">Meaning</h2>
+                <p>${word.meaning}</p>
+            </div>
+            <div class="">
+                <h2 class="font-bold">Example</h2>
+                <p>${word.sentence}</p>
+            </div>
+            <div class="">
+                <h2 class="font-bold">Synonym</h2>
+                <span class="btn">ইগার</span>
+                <span class="btn">ইগার</span>
+                <span class="btn">ইগার</span>
+                
+            </div> 
+`
+document.getElementById("my_modal_5").showModal()
+}
 
 const displayLevelWord = (words)=>{
     const wordContainer = document.getElementById("word-container");
@@ -48,17 +81,18 @@ const displayLevelWord = (words)=>{
             <p>Meaning/Pronounciation</p>
             <h2 class="text-xl font-semibold text-center font-bangla">${word.meaning ? word.meaning: "Not Found"}/${word.pronunciation? word.pronunciation: "Not Found" }</h2>
             <div class="card-actions justify-between">
-                <button class="btn btn-primary" onclick="my_modal_5.showModal()"><i class="fa-solid fa-circle-info"></i></button>
+                <button class="btn btn-primary" onclick="loadWordDetails(${word.id})"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn btn-primary"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
     </div>
        `
+
        wordContainer.append(card);
 
     }
 }
-
+// 
 const displayLessons = (lessons)=>{
     // 1. get the container and empty it
     const levelContainer = document.getElementById("level-container");
