@@ -9,7 +9,20 @@ const loadLevelWord = (id)=>{
     const url = `https://openapi.programming-hero.com/api/level/${id}`
     fetch(url)
     .then(res=> res.json())
-    .then(data=> displayLevelWord(data.data))
+    .then(data=>{
+        removeActiveClass()
+        const clickBtn = document.getElementById(`lesson-btn-${id}`)
+    
+      clickBtn.classList.add("active")
+        displayLevelWord(data.data)
+    } )
+}
+
+const removeActiveClass = ()=>{
+const lessonBtns = document.querySelectorAll(".lesson-btn");
+lessonBtns.forEach(btn=>{
+    btn.classList.remove("active")
+})
 }
 
 const displayLevelWord = (words)=>{
@@ -35,7 +48,7 @@ const displayLevelWord = (words)=>{
             <p>Meaning/Pronounciation</p>
             <h2 class="text-xl font-semibold text-center font-bangla">${word.meaning ? word.meaning: "Not Found"}/${word.pronunciation? word.pronunciation: "Not Found" }</h2>
             <div class="card-actions justify-between">
-                <button class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></button>
+                <button class="btn btn-primary" onclick="my_modal_5.showModal()"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn btn-primary"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
@@ -57,7 +70,7 @@ const displayLessons = (lessons)=>{
       const btnDiv = document.createElement("div");
       btnDiv.innerHTML = `
       
-     <button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary">
+     <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
        <i class="fa-solid fa-book-open"></i>
        Lesson - ${lesson.level_no}</button>
                 
